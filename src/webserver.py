@@ -2,6 +2,8 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 import sys
 import os
+import subprocess
+from queue import Queue
 
 app = Flask(__name__)
 api = Api(app)
@@ -13,7 +15,10 @@ print("Api running on port : {} ".format(port))
 
 class topic_tags(Resource):
     def get(self):
-        return {'hello': 'world world'}
+        system = Queue(5)
+        system.append_queue('a')
+        return system.queue_job()
+
 
 api.add_resource(topic_tags, '/')
 
