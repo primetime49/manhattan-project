@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define SIZE 1000
+#define SIZE 100
 
 class Queue {
 
