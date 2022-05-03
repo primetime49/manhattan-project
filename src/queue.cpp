@@ -19,7 +19,7 @@ class Queue {
 
     void queueEnqueue(int data)
     {
-        //check if N = 1...
+        //check if N = 1..
         if (capacity == rear) {
             printf("\nQueue compile at most one program\n");
             return;
