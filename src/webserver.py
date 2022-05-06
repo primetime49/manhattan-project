@@ -1,11 +1,7 @@
-from concurrent.futures import process, thread
-import imp
-from flask import Flask, request, g
+from flask import Flask
 from flask_restful import Resource, Api
 import sys
-import os
 import subprocess
-import queue
 import random
 import time
 import redis
@@ -26,7 +22,7 @@ def process_file(filename):
     start = time.time()
     #todo: change to actual c++ compiling
     #w = random.uniform(5,8)
-    out = subprocess.run(['g++', '-pthread', '-O3', filename, '-o', filename.split('.')[0]], capture_output=True, text=True)
+    out = subprocess.run(['g++', '-pthread', '-O3', './testcases/' + filename, '-o', './testcases/results/' + filename.split('.')[0]], capture_output=True, text=True)
 
     #pop the job that's about to start
     r.lpop('id_queue')
@@ -53,6 +49,7 @@ print("Api running on port : {} ".format(port))
 
 class HomePage(Resource):
     def get(self):
+        r.set('active_job', 0)
         return 'Hello '
 
 class EnqueueJob(Resource):
