@@ -26,7 +26,7 @@ def process_file(filename):
     start = time.time()
     #todo: change to actual c++ compiling
     #w = random.uniform(5,8)
-    out = subprocess.run(['g++', '-pthread', '-O3', filename, '-o', filename[:-4]], capture_output=True, text=True)
+    out = subprocess.run(['g++', '-pthread', '-O3', filename, '-o', filename.split('.')[0]], capture_output=True, text=True)
 
     #pop the job that's about to start
     r.lpop('id_queue')
@@ -53,7 +53,7 @@ print("Api running on port : {} ".format(port))
 
 class HomePage(Resource):
     def get(self):
-        return 'Hello World'
+        return 'Hello '
 
 class EnqueueJob(Resource):
     def get(self, filename):
