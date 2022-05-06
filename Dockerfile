@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
-RUN apt update
-RUN DEBIAN_FRONTEND=noninteractive apt -yq install \
+RUN apt-get update
+RUN apt -yq install \
     wget \
     curl \
     git \
@@ -9,10 +9,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt -yq install \
     g++ \
     make \
     pip \
-    firejail
+    redis-server
 
 
-RUN pip install Flask flask-restful
+RUN pip install Flask flask-restful redis rq
 # ADD OTHER Python PACKAGES HERE
 
 # Clean

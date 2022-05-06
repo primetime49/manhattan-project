@@ -1,0 +1,12 @@
+version: '2'
+services:
+    web:
+        build: .
+        ports:
+            - "80:5000"
+        volumes:
+            - /home/adityo/Documents/projects/manhattan-project/src:/root/app
+        depends_on:
+            - redis
+    redis:
+        image: redis
