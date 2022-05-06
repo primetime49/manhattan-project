@@ -1,0 +1,42 @@
+<html>
+    <!--element to set the title and to load the required external dependencies -->
+    <head>
+       
+        <script type="text/javascript" src="queue.js"></script>
+        <script type="text/javascript" src="heading.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <title>
+            Software Performance and Scalability
+        </title>
+        
+    </head>
+    <body>
+
+        <!--element to display the result -->
+        <div class="container"> 
+            <h1>Latency benchmark</h1>
+            <form onSubmit={handleSubmit}>
+                <label>
+                  Tolerance:
+                  <input name="tolerance" type="number" value={tolerance} onChange={onToleranceChange}/>
+                </label><br>
+                <br>
+                <label>
+                  Initial guess:
+                  <input name="initial_guess" type="number" value={initial_guess} onChange={onGuessChange}/>
+                </label>
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+            
+           <!--<p>Compile 1 request if N = 1, else if N = infinity compilation begins as soon as  request reaches the system.</p>--> 
+
+            <!--elements to load the Javascript application and the Queue class -->
+            <script>
+               ...
+            </script>
+
+        
+      </body>
+   </html>
+       
