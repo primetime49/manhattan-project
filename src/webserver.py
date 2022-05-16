@@ -1,82 +1,105 @@
-from flask import Flask
-from flask_restful import Resource, Api
-import sys
+from flask import Flask, render_template, request, send_from_directory
 import subprocess
 import random
 import time
 import redis
+import os
 from rq import Queue
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-api = Api(app)
+
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'cpp', 'c'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 port = 5000
 
 r = redis.Redis(host='redis', port=6379)
 q = Queue(connection=r)
-nQueue = 8
+r.set('active_job', 0)
+nQueue = 5
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+#Heruristic to compute the expected compilation time: evaluates number of chars and number of imports 
+#Function y = 1 - (1/(1 + x)) is used to obtain a value between 0 and 1 that will be used to place the file in the queue
+#An overtake count is computed to avoid starvation of heavy jobs: it represents the maximum number of jobs that can overtake the current one. When overtake limit is reached the job wont be overtaken any more
+#Overtake count is computed as the product of current queue size and y of current job: this way light jobs will be overtaken less often than heavy ones
+def eval_complexity(file):
+    ch = len(file.read())
+    imports = file.read().count("include")
+    weight = (ch + 1000 * imports)
+    y = 1 - (1 / ( 1 + weight))
+    max_overtake = y * q.llen()
+    return (y, max_overtake)
+
 
 def process_file(filename):
     #increment the currently active job counter
     r.incr('active_job')
     #testing purpose
     start = time.time()
-    #todo: change to actual c++ compiling
-    #w = random.uniform(5,8)
-    out = subprocess.run(['g++', '-pthread', '-O3', './testcases/' + filename, '-o', './testcases/results/' + filename.split('.')[0]], capture_output=True, text=True)
-
+    out = subprocess.run(['g++', '-pthread', '-O3', './uploads/' + filename, '-o', './uploads/results/' + filename.split('.')[0]], capture_output=True, text=True)
+    error = "error" in str(out)
     #pop the job that's about to start
     r.lpop('id_queue')
-    #time.sleep(w)
     end = time.time()
-
     #decrease the active job counter
     r.decr('active_job')
-    return (out, start, end)
+    return (out, start, end, error)  #return the output of the process and the time it took to run
+
 
 def wait_queue():
     while int(r.get('active_job')) >= nQueue:
         time.sleep(0.1)
     return int(r.lindex('id_queue', 0))
 
-'''for i in range(nQueue):
-    worker = threading.Thread(target=process_file, args=(i, main_queue,))
-    worker.setDaemon(True)
-    worker.start()''' 
 
-if sys.argv.__len__() > 1:
-    port = sys.argv[1]
-print("Api running on port : {} ".format(port))
+@app.route("/")
+def homepage():
+    return render_template('index.html')
 
-class HomePage(Resource):
-    def get(self):
-        r.set('active_job', 0)
-        return 'Hello '
 
-class EnqueueJob(Resource):
-    def get(self, filename):
-        id = random.randint(1,1000000)
+@app.route("/upload", methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        if 'file' not in request.files: # check if the post request has the file part
+            return '<p style="color:red">File not sent</b></p>'
+        file = request.files['file']
+        if file.filename == '': # If the user does not select a file, the browser submits an empty file without a filename.
+            return '<p style="color:red">File is empty</b></p>'
+        if file and not allowed_file(file.filename): # check if the file is an allowed extension
+            return '<p style="color:red">File not supported</b></p>'
+        id = random.randint(1,100000)
+        filename = str(id) + "_" + secure_filename(file.filename) #Secure function to prevent path traversal
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         r.rpush('id_queue', id)
         while wait_queue() != id:
             pass
-        #q.enqueue(process_file)
-        
-        w, start, end = process_file(filename)
-
-        res = '' + str(w) + ' ; ' + str(start) + ' ; ' +str(end) 
-        return res
-
-class EmptyQueue(Resource):
-    def get(self):
-        r.delete('id_queue')
-        r.set('active_job', 0)
-        return 'Queue is emptied'
+        out, start, end, error = process_file(filename)
+        if error:
+            return '<p style="color:red">Error douring compilation: <b>' + str(out) + '</b></p>'
+        else:
+            return 'Succesfully compiled <b>' + file.filename + '</b> in '+ str(round(end - start, 2)) +' seconds <br><br><a class="btn" id="dowload-btn" style="width:100%" download="/uploads/'+ filename.split('.')[0] + '" href="/uploads/'+ filename.split('.')[0] + '"> Download </a>'
 
 
-api.add_resource(HomePage, '/')
-api.add_resource(EnqueueJob, '/enqueue/<filename>')
-api.add_resource(EmptyQueue, '/empty')
+@app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
+def download(filename):
+    uploads = os.path.join(app.config['UPLOAD_FOLDER'], 'results')
+    return send_from_directory(uploads, filename, as_attachment=True)
+
+
+@app.route("/empty_queue")
+def empty_queue():
+    r.delete('id_queue')
+    r.set('active_job', 0)
+    return 'Queue is emptied'
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=port)
-    r.set('active_job', 0)
-    

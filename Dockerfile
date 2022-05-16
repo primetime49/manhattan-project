@@ -12,7 +12,7 @@ RUN apt -yq install \
     redis-server
 
 
-RUN pip install Flask flask-restful redis rq
+RUN pip install Flask flask-restful redis rq 
 # ADD OTHER Python PACKAGES HERE
 
 # Clean
