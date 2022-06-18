@@ -1,0 +1,211 @@
+# stats: dump at 1655562129
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6612.82421875 0 6612.82421875 6612.82421875 0 0
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 10.567232284345875 0 10.567232284345875 10.567232284345875 0 0
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.62109375 0 0.62109375 0.62109375 0 0
+stats: session 2 2824.982 851.0659999999999 3676.048 1973.916 0 0
+stats: users_count 2 2
+stats: finish_users_count 2 2
+stats: connect 2 0.755 0.05400000000000005 0.809 0.701 0 0
+stats: request 2 2820.8595 853.1345000000001 3673.994 1967.725 0 0
+stats: page 2 2820.8595 853.1345000000001 3673.994 1967.725 0 0
+stats: 200 2 2
+stats: size_rcv 734 734
+stats: size_sent 296 296
+stats: connected 0 0
+# stats: dump at 1655562139
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6624.34765625 0.0 6624.34765625 6612.82421875 6612.82421875 1
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 8.082071812836231 0.0 10.567232284345875 8.082071812836231 10.567232284345875 1
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.6015625 0.0 0.62109375 0.6015625 0.62109375 1
+stats: session 1 1835.19 0.0 3676.048 1835.19 2824.982 2
+stats: users_count 1 3
+stats: finish_users_count 1 3
+stats: connect 1 1.285 0.0 1.285 0.701 0.755 2
+stats: request 1 1833.315 0.0 3673.994 1833.315 2820.8595 2
+stats: page 1 1833.315 0.0 3673.994 1833.315 2820.8595 2
+stats: 200 1 3
+stats: size_rcv 367 1101
+stats: size_sent 148 444
+stats: connected 0 0
+# stats: dump at 1655562149
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6618.484375 0.0 6624.34765625 6612.82421875 6618.5859375 2
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 2.965094457650444 0.0 10.567232284345875 2.965094457650444 9.324652048591053 2
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.58984375 0.0 0.62109375 0.58984375 0.611328125 2
+stats: session 0 0 0 3676.048 1835.19 2495.0513333333333 3
+stats: users_count 0 3
+stats: finish_users_count 0 3
+stats: request 0 0 0 3673.994 1833.315 2491.678 3
+stats: connect 0 0 0 1.285 0.701 0.9316666666666666 3
+stats: page 0 0 0 3673.994 1833.315 2491.678 3
+stats: 200 0 3
+stats: size_rcv 0 1101
+stats: size_sent 0 444
+stats: connected 0 0
+# stats: dump at 1655562159
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6623.69921875 0.0 6624.34765625 6612.82421875 6618.552083333333 3
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 0.4883546205860256 0.0 10.567232284345875 0.4883546205860256 7.204799518277517 3
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.5 0.0 0.62109375 0.5 0.6041666666666666 3
+stats: session 2 1840.176 0.08900000000011232 3676.048 1835.19 2495.0513333333333 3
+stats: users_count 2 5
+stats: finish_users_count 2 5
+stats: request 1 1838.13 0.0 3673.994 1833.315 2491.678 3
+stats: connect 2 1.1255 0.026499999999999968 1.285 0.701 0.9316666666666666 3
+stats: page 1 1838.13 0.0 3673.994 1833.315 2491.678 3
+stats: 200 1 4
+stats: size_rcv 366 1467
+stats: size_sent 296 740
+stats: connected 1 1
+# stats: dump at 1655562169
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6624.29296875 0.0 6624.34765625 6612.82421875 6619.8388671875 4
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 5.323003873547419 0.0 10.567232284345875 0.4883546205860256 5.525688293854644 4
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.5 0.0 0.62109375 0.5 0.578125 4
+stats: session 1 1834.353 0.0 3676.048 1834.353 2233.1012 5
+stats: users_count 1 6
+stats: finish_users_count 1 6
+stats: connect 1 1.106 0.0 1.285 0.701 1.0091999999999999 5
+stats: request 2 1835.3725 2.9375 3673.994 1832.435 2328.291 4
+stats: page 2 1835.3725 2.9375 3673.994 1832.435 2328.291 4
+stats: 200 2 6
+stats: size_rcv 733 2200
+stats: size_sent 148 888
+stats: connected -1 0
+# stats: dump at 1655562179
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6624.6328125 0.0 6624.6328125 6612.82421875 6620.7296875 5
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 2.7551659361302443 0.0 10.567232284345875 0.4883546205860256 5.4851514097931995 5
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.421875 0.0 0.62109375 0.421875 0.5625 5
+stats: session 1 1823.022 0.0 3676.048 1823.022 2166.6431666666667 6
+stats: users_count 1 7
+stats: finish_users_count 1 7
+stats: request 1 1821.127 0.0 3673.994 1821.127 2163.9848333333334 6
+stats: connect 1 0.927 0.0 1.285 0.701 1.0253333333333332 6
+stats: page 1 1821.127 0.0 3673.994 1821.127 2163.9848333333334 6
+stats: 200 1 7
+stats: size_rcv 367 2567
+stats: size_sent 148 1036
+stats: connected 0 0
+# stats: dump at 1655562189
+stats: users 1 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6623.94921875 0.0 6624.6328125 6612.82421875 6621.380208333333 6
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 2.8542814221332 0.0 10.567232284345875 0.4883546205860256 5.030153830849374 6
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.4296875 0.0 0.62109375 0.421875 0.5390625 6
+stats: session 1 1848.189 0.0 3676.048 1823.022 2117.5544285714286 7
+stats: users_count 2 9
+stats: finish_users_count 1 8
+stats: request 1 1846.211 0.0 3673.994 1821.127 2115.005142857143 7
+stats: connect 2 1.173 0.052000000000000046 1.285 0.701 1.0112857142857141 7
+stats: page 1 1846.211 0.0 3673.994 1821.127 2115.005142857143 7
+stats: 200 1 8
+stats: size_rcv 367 2934
+stats: size_sent 296 1332
+stats: connected 1 1
+# stats: dump at 1655562199
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6622.4765625 0.0 6624.6328125 6612.82421875 6621.747209821428 7
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 5.325665708213527 0.0 10.567232284345875 0.4883546205860256 4.719314915318492 7
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.37109375 0.0 0.62109375 0.37109375 0.5234375 7
+stats: session 2 1840.517 4.500999999999976 3676.048 1823.022 2083.88375 8
+stats: users_count 1 10
+stats: finish_users_count 2 10
+stats: page 2 1838.503 4.5 3673.994 1821.127 2081.405875 8
+stats: 200 2 10
+stats: request 2 1838.503 4.5 3673.994 1821.127 2081.405875 8
+stats: connect 1 1.406 0.0 1.406 0.701 1.047222222222222 9
+stats: size_rcv 731 3665
+stats: size_sent 148 1480
+stats: connected -1 0
+# stats: dump at 1655562209
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6622.9921875 0.0 6624.6328125 6612.82421875 6621.83837890625 8
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 2.7669963690997874 0.0 10.567232284345875 0.4883546205860256 4.795108764430371 8
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.390625 0.0 0.62109375 0.37109375 0.50439453125 8
+stats: session 2 1845.821 3.1380000000000905 3676.048 1823.022 2035.2104 10
+stats: users_count 2 12
+stats: finish_users_count 2 12
+stats: request 2 1843.671 3.3150000000000546 3673.994 1821.127 2032.8253 10
+stats: page 2 1843.671 3.3150000000000546 3673.994 1821.127 2032.8253 10
+stats: 200 2 12
+stats: connect 2 1.08 0.16399999999999995 1.406 0.701 1.0831 10
+stats: size_rcv 734 4399
+stats: size_sent 304 1784
+stats: connected 0 0
+# stats: dump at 1655562219
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6625.92578125 0.0 6625.92578125 6612.82421875 6621.966579861111 9
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 5.3506688336042005 0.0 10.567232284345875 0.4883546205860256 4.569762942726973 9
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.3984375 0.0 0.62109375 0.37109375 0.4917534722222222 9
+stats: session 2 1851.1675 15.497499999999945 3676.048 1823.022 2003.6454999999999 12
+stats: users_count 2 14
+stats: finish_users_count 2 14
+stats: request 1 1833.87 0.0 3673.994 1821.127 2001.2995833333334 12
+stats: connect 2 0.969 0.08999999999999997 1.406 0.701 1.0825833333333332 12
+stats: page 1 1833.87 0.0 3673.994 1821.127 2001.2995833333334 12
+stats: 200 1 13
+stats: size_rcv 366 4765
+stats: size_sent 304 2088
+stats: connected 1 1
+# stats: dump at 1655562229
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6613.19140625 0.0 6625.92578125 6612.82421875 6622.3625 10
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 5.146506386175808 0.0 10.567232284345875 0.4883546205860256 4.647853531814696 10
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.421875 0.0 0.62109375 0.37109375 0.482421875 10
+stats: session 2 2285.6175 424.0154999999999 3676.048 1823.022 1981.8629285714285 14
+stats: users_count 2 16
+stats: finish_users_count 2 16
+stats: request 3 2143.909 398.5285654111468 3673.994 1821.127 1988.4203846153846 13
+stats: connect 2 0.9155 0.0655 1.406 0.701 1.0663571428571428 14
+stats: page 3 2143.909 398.5285654111468 3673.994 1821.127 1988.4203846153846 13
+stats: 200 3 16
+stats: size_rcv 1101 5866
+stats: size_sent 296 2384
+stats: connected -1 0
+# stats: dump at 1655562239
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6626.66796875 0.0 6626.66796875 6612.82421875 6621.528764204545 11
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 6.4125000000000005 0.0 10.567232284345875 0.4883546205860256 4.693185609483888 11
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.4296875 0.0 0.62109375 0.37109375 0.47691761363636365 11
+stats: session 0 0 0 3676.048 1823.022 2019.83225 16
+stats: users_count 0 16
+stats: finish_users_count 0 16
+stats: page 0 0 0 3673.994 1821.127 2017.5745000000002 16
+stats: request 0 0 0 3673.994 1821.127 2017.5745000000002 16
+stats: connect 0 0 0 1.406 0.701 1.0474999999999999 16
+stats: 200 0 16
+stats: size_rcv 0 5866
+stats: size_sent 0 2384
+stats: connected 0 0
+# stats: dump at 1655562249
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6626.69921875 0.0 6626.69921875 6612.82421875 6621.95703125 12
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 0.538442273979464 0.0 10.567232284345875 0.4883546205860256 4.8364618086935645 12
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.359375 0.0 0.62109375 0.359375 0.4729817708333333 12
+stats: session 1 1826.218 0.0 3676.048 1823.022 2019.83225 16
+stats: users_count 1 17
+stats: finish_users_count 1 17
+stats: request 1 1824.162 0.0 3673.994 1821.127 2017.5745000000002 16
+stats: page 1 1824.162 0.0 3673.994 1821.127 2017.5745000000002 16
+stats: connect 1 1.104 0.0 1.406 0.701 1.0474999999999999 16
+stats: 200 1 17
+stats: size_rcv 366 6232
+stats: size_sent 148 2532
+stats: connected 0 0
+# stats: dump at 1655562250
+stats: users 0 2
+stats: {freemem,"tsung_controller@adityo-lenovo-dal"} 1 6626.75 0.0 6626.75 6612.82421875 6622.321814903846 13
+stats: {cpu,"tsung_controller@adityo-lenovo-dal"} 1 2.816020025031289 0.0 10.567232284345875 0.4883546205860256 4.505844921407864 13
+stats: {load,"tsung_controller@adityo-lenovo-dal"} 1 0.30859375 0.0 0.62109375 0.30859375 0.46424278846153844 13
+stats: session 0 0 0 3676.048 1823.022 2008.4431764705882 17
+stats: users_count 0 17
+stats: finish_users_count 0 17
+stats: request 0 0 0 3673.994 1821.127 2006.197294117647 17
+stats: page 0 0 0 3673.994 1821.127 2006.197294117647 17
+stats: 200 0 17
+stats: connect 0 0 0 1.406 0.701 1.0508235294117645 17
+stats: size_rcv 0 6232
+stats: size_sent 0 2532
+stats: connected 0 0
+EndMonitor:{1655,562250,700924}

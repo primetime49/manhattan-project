@@ -17,7 +17,7 @@ The webserver will listen on port 80, to access it, open a browser and go to htt
 1. sudo docker-compose up
 
 # Tsung
-1. tsung -f http_simple.xml start
+1. tsung -f tsung/http_simple.xml start
 2. cd /home/adityo/.tsung/log/20220506-1828 (change the timestamp)
-3. perl ~/Downloads/tsung-1.7.0/src/tsung_stats.pl
+3. perl ~/Downloads/tsung-1.7.0/src/tsung_stats.pl (Change to your own dir)
 4. google-chrome report.html

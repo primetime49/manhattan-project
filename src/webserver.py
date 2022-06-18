@@ -4,7 +4,6 @@ import random
 import time
 import redis
 import os
-from rq import Queue
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -17,7 +16,6 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 port = 5000
 
 r = redis.Redis(host='redis', port=6379)
-q = Queue(connection=r)
 r.set('active_job', 0)
 nQueue = 2
 
@@ -35,7 +33,7 @@ def eval_complexity(file):
     imports = file.read().count("include")
     weight = (ch + 1000 * imports)
     y = 1 - (1 / ( 1 + weight))
-    max_overtake = y * q.llen()
+    max_overtake = y * r.llen('id_queue')
     return (y, max_overtake)
 
 

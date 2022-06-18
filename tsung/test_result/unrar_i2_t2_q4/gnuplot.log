@@ -1,0 +1,250 @@
+
+	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [1903.42:1903.42], adjusting to [1884.39:1922.46]
+
+	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [1903.42:1903.42], adjusting to [1884.39:1922.46]
+
+	title is " HTTP Code Response rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " total", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " HTTP Code Response rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " total", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Request and tcp/udp connection rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Mean request (and connection) duration", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Request and tcp/udp connection rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Mean request (and connection) duration", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Transaction and page rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Mean transaction and page duration", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [1895.45:1895.45], adjusting to [1876.5:1914.4]
+
+	title is " Transaction and page rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Mean transaction and page duration", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [1895.45:1895.45], adjusting to [1876.5:1914.4]
+
+	title is " Simultaneous users and opened TCP/UDP connections", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " maximum_simultaneous", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Simultaneous users and opened TCP/UDP connections", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " maximum_simultaneous", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Users arrival/departure rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Total users", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Users arrival/departure rate", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Total users", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Network throughput", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Total send/receive bytes", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Network throughput", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " Total send/receive bytes", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+
+	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0:0], adjusting to [-1:1]
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [9.58209:9.58209], adjusting to [9.48627:9.67791]
+
+	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+
+	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0:0], adjusting to [-1:1]
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [9.58209:9.58209], adjusting to [9.48627:9.67791]
+
+	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+
+	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0:0], adjusting to [-1:1]
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [6625.21:6625.21], adjusting to [6558.96:6691.47]
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+
+	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0:0], adjusting to [-1:1]
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [6625.21:6625.21], adjusting to [6558.96:6691.47]
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+
+	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0:0], adjusting to [-1:1]
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0.378906:0.378906], adjusting to [0.375117:0.382695]
+
+	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+
+	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " stddev", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0:0], adjusting to [-1:1]
+
+	title is " max_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+
+	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
+
+Warning: empty y range [0.378906:0.378906], adjusting to [0.375117:0.382695]
