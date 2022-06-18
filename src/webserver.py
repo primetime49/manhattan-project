@@ -19,7 +19,6 @@ r = redis.Redis(host='redis', port=6379)
 r.set('active_job', 0)
 nQueue = 2
 
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -28,7 +27,8 @@ def allowed_file(filename):
 #Function y = 1 - (1/(1 + x)) is used to obtain a value between 0 and 1 that will be used to place the file in the queue
 #An overtake count is computed to avoid starvation of heavy jobs: it represents the maximum number of jobs that can overtake the current one. When overtake limit is reached the job wont be overtaken any more
 #Overtake count is computed as the product of current queue size and y of current job: this way light jobs will be overtaken less often than heavy ones
-def eval_complexity(file):
+def eval_complexity(filename):
+    file = open('./uploads/' + filename)
     ch = len(file.read())
     imports = file.read().count("include")
     weight = (ch + 1000 * imports)
@@ -40,12 +40,12 @@ def eval_complexity(file):
 def process_file(filename):
     #increment the currently active job counter
     r.incr('active_job')
+    #pop the job that's about to start
+    r.lpop('id_queue')
     #testing purpose
     start = time.time()
     out = subprocess.run(['g++', '-pthread', '-O3', './uploads/' + filename, '-o', './uploads/results/' + filename.split('.')[0]], capture_output=True, text=True)
     error = "error" in str(out)
-    #pop the job that's about to start
-    r.lpop('id_queue')
     end = time.time()
     #decrease the active job counter
     r.decr('active_job')
@@ -56,8 +56,14 @@ def wait_queue():
     # frequently check the file at the head of queue
     while int(r.get('active_job')) >= nQueue:
         time.sleep(0.1)
-    return int(r.lindex('id_queue', 0))
+    return str(r.lindex('id_queue', 0))
 
+def push_file(filename):
+    id = random.randint(1,1000000)
+    y, comp = eval_complexity(filename)
+    xid = (str(id)+'_'+str(y))
+    r.rpush('id_queue', xid)
+    return id
 
 @app.route("/")
 def homepage():
@@ -74,11 +80,10 @@ def upload_file():
             return '<p style="color:red">File is empty</b></p>'
         if file and not allowed_file(file.filename): # check if the file is an allowed extension
             return '<p style="color:red">File not supported</b></p>'
-        id = random.randint(1,100000)
+        id = push_file(filename)
         filename = str(id) + "_" + secure_filename(file.filename) #Secure function to prevent path traversal
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        r.rpush('id_queue', id)
-        while wait_queue() != id:
+        while int(wait_queue().split('_')[0][2:]) != id:
             pass
         out, start, end, error = process_file(filename)
         if error:
@@ -94,11 +99,10 @@ def download(filename):
 
 @app.route('/enqueue/<path:filename>', methods=['GET'])
 def enqueue(filename):
-        id = random.randint(1,1000000)
-        r.rpush('id_queue', id)
+        id = push_file(filename)
         # if the file at the head of queue is him, then it's his time to get processed (go inside active queue)
         # otherwise continue looping
-        while wait_queue() != id:
+        while int(wait_queue().split('_')[0][2:]) != id:
             pass
         out, start, end, error = process_file(filename)
         if error:

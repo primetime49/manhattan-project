@@ -139,7 +139,7 @@
 
 	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
 
-Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+Warning: empty y range [0.0344828:0.0344828], adjusting to [0.0341379:0.0348276]
 
 	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
 
@@ -156,7 +156,7 @@ Warning: empty y range [0:0], adjusting to [-1:1]
 
 	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
 
-Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+Warning: empty y range [0.0344828:0.0344828], adjusting to [0.0341379:0.0348276]
 
 	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
 
@@ -173,7 +173,7 @@ Warning: empty y range [0:0], adjusting to [-1:1]
 
 	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
 
-Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+Warning: empty y range [0.0344828:0.0344828], adjusting to [0.0341379:0.0348276]
 
 	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
 
@@ -190,7 +190,7 @@ Warning: empty y range [0:0], adjusting to [-1:1]
 
 	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
 
-Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+Warning: empty y range [0.0344828:0.0344828], adjusting to [0.0341379:0.0348276]
 
 	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
 
@@ -207,7 +207,7 @@ Warning: empty y range [0:0], adjusting to [-1:1]
 
 	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
 
-Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+Warning: empty y range [0.0344828:0.0344828], adjusting to [0.0341379:0.0348276]
 
 	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
 
@@ -221,11 +221,10 @@ Warning: empty y range [0:0], adjusting to [-1:1]
 
 	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
 
-Warning: empty y range [0.789062:0.789062], adjusting to [0.781172:0.796953]
 
 	title is " rate", offset at (character 0, 0, 0) textcolor lt -1
 
-Warning: empty y range [0.1:0.1], adjusting to [0.099:0.101]
+Warning: empty y range [0.0344828:0.0344828], adjusting to [0.0341379:0.0348276]
 
 	title is " mean", offset at (character 0, 0, 0) textcolor lt -1
 
@@ -239,4 +238,3 @@ Warning: empty y range [0:0], adjusting to [-1:1]
 
 	title is " min_sample", offset at (character 0, 0, 0) textcolor lt -1
 
-Warning: empty y range [0.789062:0.789062], adjusting to [0.781172:0.796953]
