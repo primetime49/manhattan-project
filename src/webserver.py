@@ -53,6 +53,7 @@ def process_file(filename):
 
 
 def wait_queue():
+    # frequently check the file at the head of queue
     while int(r.get('active_job')) >= nQueue:
         time.sleep(0.1)
     return int(r.lindex('id_queue', 0))
@@ -95,6 +96,8 @@ def download(filename):
 def enqueue(filename):
         id = random.randint(1,1000000)
         r.rpush('id_queue', id)
+        # if the file at the head of queue is him, then it's his time to get processed (go inside active queue)
+        # otherwise continue looping
         while wait_queue() != id:
             pass
         out, start, end, error = process_file(filename)
