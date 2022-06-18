@@ -19,7 +19,7 @@ port = 5000
 r = redis.Redis(host='redis', port=6379)
 q = Queue(connection=r)
 r.set('active_job', 0)
-nQueue = 5
+nQueue = 2
 
 
 def allowed_file(filename):
@@ -93,6 +93,17 @@ def download(filename):
     uploads = os.path.join(app.config['UPLOAD_FOLDER'], 'results')
     return send_from_directory(uploads, filename, as_attachment=True)
 
+@app.route('/enqueue/<path:filename>', methods=['GET'])
+def enqueue(filename):
+        id = random.randint(1,1000000)
+        r.rpush('id_queue', id)
+        while wait_queue() != id:
+            pass
+        out, start, end, error = process_file(filename)
+        if error:
+            return '<p style="color:red">Error douring compilation: <b>' + str(out) + '</b></p>'
+        else:
+            return '' + str(out) + ' ; ' + str(start) + ' ; ' +str(end) 
 
 @app.route("/empty_queue")
 def empty_queue():
