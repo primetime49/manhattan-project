@@ -17,8 +17,19 @@ port = 5000
 
 r = redis.Redis(host='redis', port=6379)
 r.set('active_job', 0)
+
+r.set('active_job_light', 0)
+r.set('active_job_medium', 0)
+r.set('active_job_heavy', 0)
+
 r.set('active_cat', 'light')
-nQueue = 1
+
+next_turn = {
+    'light': 'medium',
+    'medium': 'heavy',
+    'heavy': 'light'
+}
+nQueue = 4
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -46,6 +57,7 @@ def eval_complexity(filename):
 def process_file(filename,cat):
     #increment the currently active job counter
     r.incr('active_job')
+    r.incr('active_job_'+cat)
     #pop the job that's about to start
     r.lpop('id_queue_'+cat)
     #testing purpose
@@ -56,6 +68,9 @@ def process_file(filename,cat):
     end = time.time()
     #decrease the active job counter
     r.decr('active_job')
+    if int(r.get('active_job_'+cat)) >= (get_cat_limit(cat)+1) or r.llen('id_queue_'+cat) == 0:
+        r.set('active_cat', next_turn[cat])
+        r.set('active_job_'+cat, 0)
     return (out, start, end, error)  #return the output of the process and the time it took to run
 
 
@@ -77,19 +92,13 @@ def wait_queue(cat):
     # frequently check the file at the head of queue
     while break_queue(cat) == False:
         time.sleep(0.1)
-    return [int(x) for x in r.lrange('id_queue_'+cat, 0, get_cat_limit(cat))]
+    return int(r.lindex('id_queue_'+cat, 0))
 
 def check_turn():
     curr_turn = str(r.get('active_cat'))[2:-1]
-    if curr_turn == 'light':
-        r.set('active_cat', 'medium')
-        return 'light'
-    elif curr_turn == 'medium':
-        r.set('active_cat', 'heavy')
-        return 'medium'
-    elif curr_turn == 'heavy':
-        r.set('active_cat', 'light')
-        return 'heavy'
+    if r.llen('id_queue_'+curr_turn) == 0:
+        r.set('active_cat', next_turn[curr_turn])
+    return curr_turn
 
 def push_file(filename):
     id = random.randint(1,1000000)
@@ -116,7 +125,7 @@ def upload_file():
         id, cat = push_file(filename)
         filename = str(id) + "_" + secure_filename(file.filename) #Secure function to prevent path traversal
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        while id not in (wait_queue(cat)):
+        while int(wait_queue(cat)) != id:
             pass
         out, start, end, error = process_file(filename, cat)
         if error:
@@ -135,7 +144,7 @@ def enqueue(filename):
         id, cat = push_file(filename)
         # if the file at the head of queue is him, then it's his time to get processed (go inside active queue)
         # otherwise continue looping
-        while id not in (wait_queue(cat)):
+        while int(wait_queue(cat)) != id:
             pass
         out, start, end, error = process_file(filename, cat)
         if error:
@@ -146,16 +155,19 @@ def enqueue(filename):
 @app.route("/empty_queue")
 def empty_queue():
     before = int(r.get('active_job'))
+
     r.delete('id_queue_light')
     r.delete('id_queue_medium')
     r.delete('id_queue_heavy')
     r.delete('id_queue')
+    
     r.set('active_job', 0)
+    r.set('active_job_light', 0)
+    r.set('active_job_medium', 0)
+    r.set('active_job_heavy', 0)
+    
     r.set('active_cat', 'light')
-    #r.lpush('id_queue', 1)
-    #r.lpush('id_queue', 2)
-    #r.lpush('id_queue', 3)
-    return 'Queue length was ' + str(before) + '. Queue is emptied'
+    return 'Queue length was ' + str(before) + '. Queue is emptied' + ' ; ' + str(int(r.get('active_job_light'))) + ' ; ' +str(int(r.get('active_job_medium'))) + ' ; ' +str(int(r.get('active_job_heavy'))) + ' ; ' + str(int(r.llen('id_queue_light'))) + ' ; ' +str(int(r.llen('id_queue_medium'))) + ' ; ' +str(int(r.llen('id_queue_heavy')))
 
 
 if __name__ == '__main__':

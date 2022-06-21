@@ -39,19 +39,19 @@
   probabilities must be 100 -->
 
  <sessions>
-  <session name="http-example" probability="50" type="ts_http">
+  <session name="http-example" probability="25" type="ts_http">
     <request> <http url="/enqueue/28210_unrar.c" method="GET" version="1.1" ></http> </request>
 
   </session>
-  <session name="http-example" probability="50" type="ts_http"> 
+  <session name="http-example" probability="25" type="ts_http"> 
     <request> <http url="/enqueue/microbench.cpp" method="GET" version="1.1" ></http> </request> 
   </session> 
    
-  <session name="http-example" probability="0" type="ts_http"> 
+  <session name="http-example" probability="25" type="ts_http"> 
     <request> <http url="/enqueue/linux_profiler.c" method="GET" version="1.1" ></http> </request> 
   </session> 
    
-  <session name="http-example" probability="0" type="ts_http"> 
+  <session name="http-example" probability="25" type="ts_http"> 
     <request> <http url="/enqueue/3d-pipeline.cpp" method="GET" version="1.1" ></http> </request> 
   </session> 
  </sessions>
