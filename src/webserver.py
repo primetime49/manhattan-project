@@ -18,7 +18,7 @@ port = 5000
 r = redis.Redis(host='redis', port=6379)
 r.set('active_job', 0)
 r.set('active_cat', 'light')
-nQueue = 4
+nQueue = 1
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -50,6 +50,7 @@ def process_file(filename,cat):
     r.lpop('id_queue_'+cat)
     #testing purpose
     start = time.time()
+    #time.sleep(5)
     out = subprocess.run(['g++', '-pthread', '-O3', './uploads/' + filename, '-o', './uploads/results/' + filename.split('.')[0]], capture_output=True, text=True)
     error = "error" in str(out)
     end = time.time()
@@ -66,9 +67,15 @@ def get_cat_limit(cat):
     elif cat == 'heavy':
         return int(max((nQueue/4)-1,0))
 
+def break_queue(cat):
+    if int(r.get('active_job')) < nQueue and check_turn() == cat:
+        return True
+    else:
+        return False
+
 def wait_queue(cat):
     # frequently check the file at the head of queue
-    while int(r.get('active_job')) >= nQueue and check_turn() != cat:
+    while break_queue(cat) == False:
         time.sleep(0.1)
     return [int(x) for x in r.lrange('id_queue_'+cat, 0, get_cat_limit(cat))]
 
@@ -78,11 +85,11 @@ def check_turn():
         r.set('active_cat', 'medium')
         return 'light'
     elif curr_turn == 'medium':
-        r.set('active_cat', 'high')
+        r.set('active_cat', 'heavy')
         return 'medium'
-    elif curr_turn == 'high':
+    elif curr_turn == 'heavy':
         r.set('active_cat', 'light')
-        return 'high'
+        return 'heavy'
 
 def push_file(filename):
     id = random.randint(1,1000000)
