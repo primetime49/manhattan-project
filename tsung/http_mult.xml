@@ -23,7 +23,7 @@
   the mean inter-arrival time between new clients and the phase
   duration -->
    <arrivalphase phase="1" duration="4" unit="minute">
-     <users interarrival="0.4" unit="second"></users>
+     <users interarrival="0.333" unit="second"></users>
    </arrivalphase>
   </load>
 
@@ -39,12 +39,20 @@
   probabilities must be 100 -->
 
  <sessions>
-  <session name="http-example" probability="100" type="ts_http">
-
-    <!-- full url with server name, this overrides the "server" config value -->
-
+  <session name="http-example" probability="50" type="ts_http">
     <request> <http url="/enqueue/28210_unrar.c" method="GET" version="1.1" ></http> </request>
 
   </session>
+  <session name="http-example" probability="50" type="ts_http"> 
+    <request> <http url="/enqueue/microbench.cpp" method="GET" version="1.1" ></http> </request> 
+  </session> 
+   
+  <session name="http-example" probability="0" type="ts_http"> 
+    <request> <http url="/enqueue/linux_profiler.c" method="GET" version="1.1" ></http> </request> 
+  </session> 
+   
+  <session name="http-example" probability="0" type="ts_http"> 
+    <request> <http url="/enqueue/error.c" method="GET" version="1.1" ></http> </request> 
+  </session> 
  </sessions>
 </tsung>
