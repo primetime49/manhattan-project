@@ -17,7 +17,7 @@ port = 5000
 
 r = redis.Redis(host='redis', port=6379)
 r.set('active_job', 0)
-nQueue = 2
+nQueue = 10
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -112,9 +112,10 @@ def enqueue(filename):
 
 @app.route("/empty_queue")
 def empty_queue():
+    before = int(r.get('active_job'))
     r.delete('id_queue')
     r.set('active_job', 0)
-    return 'Queue is emptied'
+    return 'Queue length was ' + str(before) + '. Queue is emptied'
 
 
 if __name__ == '__main__':
