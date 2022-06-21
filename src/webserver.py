@@ -17,7 +17,8 @@ port = 5000
 
 r = redis.Redis(host='redis', port=6379)
 r.set('active_job', 0)
-nQueue = 10
+r.set('active_cat', 'light')
+nQueue = 4
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -33,15 +34,20 @@ def eval_complexity(filename):
     imports = file.read().count("include")
     weight = (ch + 1000 * imports)
     y = 1 - (1 / ( 1 + weight))
-    max_overtake = y * r.llen('id_queue')
-    return (y, max_overtake)
+    max_overtake = 0#y * r.llen('id_queue')
+    cat = 'heavy'
+    if weight < 10_000:
+        cat = 'light'
+    elif weight < 100_000:
+        cat = 'medium'
+    return (cat, max_overtake)
 
 
-def process_file(filename):
+def process_file(filename,cat):
     #increment the currently active job counter
     r.incr('active_job')
     #pop the job that's about to start
-    r.lpop('id_queue')
+    r.lpop('id_queue_'+cat)
     #testing purpose
     start = time.time()
     out = subprocess.run(['g++', '-pthread', '-O3', './uploads/' + filename, '-o', './uploads/results/' + filename.split('.')[0]], capture_output=True, text=True)
@@ -52,18 +58,38 @@ def process_file(filename):
     return (out, start, end, error)  #return the output of the process and the time it took to run
 
 
-def wait_queue():
+def get_cat_limit(cat):
+    if cat == 'light':
+        return nQueue-1
+    elif cat == 'medium':
+        return int(max((nQueue/2)-1,0))
+    elif cat == 'heavy':
+        return int(max((nQueue/4)-1,0))
+
+def wait_queue(cat):
     # frequently check the file at the head of queue
-    while int(r.get('active_job')) >= nQueue:
+    while int(r.get('active_job')) >= nQueue and check_turn() != cat:
         time.sleep(0.1)
-    return str(r.lindex('id_queue', 0))
+    return [int(x) for x in r.lrange('id_queue_'+cat, 0, get_cat_limit(cat))]
+
+def check_turn():
+    curr_turn = str(r.get('active_cat'))[2:-1]
+    if curr_turn == 'light':
+        r.set('active_cat', 'medium')
+        return 'light'
+    elif curr_turn == 'medium':
+        r.set('active_cat', 'high')
+        return 'medium'
+    elif curr_turn == 'high':
+        r.set('active_cat', 'light')
+        return 'high'
 
 def push_file(filename):
     id = random.randint(1,1000000)
     y, comp = eval_complexity(filename)
-    xid = (str(id)+'_'+str(y))
-    r.rpush('id_queue', xid)
-    return id
+    #xid = (str(id)+'_'+str(y))
+    r.rpush('id_queue_'+y, id)
+    return (id,y)
 
 @app.route("/")
 def homepage():
@@ -80,12 +106,12 @@ def upload_file():
             return '<p style="color:red">File is empty</b></p>'
         if file and not allowed_file(file.filename): # check if the file is an allowed extension
             return '<p style="color:red">File not supported</b></p>'
-        id = push_file(filename)
+        id, cat = push_file(filename)
         filename = str(id) + "_" + secure_filename(file.filename) #Secure function to prevent path traversal
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        while int(wait_queue().split('_')[0][2:]) != id:
+        while id not in (wait_queue(cat)):
             pass
-        out, start, end, error = process_file(filename)
+        out, start, end, error = process_file(filename, cat)
         if error:
             return '<p style="color:red">Error douring compilation: <b>' + str(out) + '</b></p>'
         else:
@@ -99,22 +125,29 @@ def download(filename):
 
 @app.route('/enqueue/<path:filename>', methods=['GET'])
 def enqueue(filename):
-        id = push_file(filename)
+        id, cat = push_file(filename)
         # if the file at the head of queue is him, then it's his time to get processed (go inside active queue)
         # otherwise continue looping
-        while int(wait_queue().split('_')[0][2:]) != id:
+        while id not in (wait_queue(cat)):
             pass
-        out, start, end, error = process_file(filename)
+        out, start, end, error = process_file(filename, cat)
         if error:
             return '<p style="color:red">Error douring compilation: <b>' + str(out) + '</b></p>'
         else:
-            return '' + str(out) + ' ; ' + str(start) + ' ; ' +str(end) 
+            return '' + str(out) + ' ; ' + str(start) + ' ; ' +str(end) + ' ; ' +str(cat) 
 
 @app.route("/empty_queue")
 def empty_queue():
     before = int(r.get('active_job'))
+    r.delete('id_queue_light')
+    r.delete('id_queue_medium')
+    r.delete('id_queue_heavy')
     r.delete('id_queue')
     r.set('active_job', 0)
+    r.set('active_cat', 'light')
+    #r.lpush('id_queue', 1)
+    #r.lpush('id_queue', 2)
+    #r.lpush('id_queue', 3)
     return 'Queue length was ' + str(before) + '. Queue is emptied'
 
 
