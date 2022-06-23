@@ -29,7 +29,7 @@ next_turn = {
     'medium': 'heavy',
     'heavy': 'light'
 }
-nQueue = 4
+nQueue = 6
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -37,21 +37,18 @@ def allowed_file(filename):
 
 #Heruristic to compute the expected compilation time: evaluates number of chars and number of imports 
 #Function y = 1 - (1/(1 + x)) is used to obtain a value between 0 and 1 that will be used to place the file in the queue
-#An overtake count is computed to avoid starvation of heavy jobs: it represents the maximum number of jobs that can overtake the current one. When overtake limit is reached the job wont be overtaken any more
-#Overtake count is computed as the product of current queue size and y of current job: this way light jobs will be overtaken less often than heavy ones
 def eval_complexity(filename):
     file = open('./uploads/' + filename)
     ch = len(file.read())
     imports = file.read().count("include")
-    weight = (ch + 1000 * imports)
+    weight = (ch + 1_000 * imports)
     y = 1 - (1 / ( 1 + weight))
-    max_overtake = 0#y * r.llen('id_queue')
     cat = 'heavy'
     if weight < 10_000:
         cat = 'light'
     elif weight < 100_000:
         cat = 'medium'
-    return (cat, max_overtake)
+    return cat
 
 
 def process_file(filename,cat):
@@ -100,12 +97,10 @@ def check_turn():
         r.set('active_cat', next_turn[curr_turn])
     return curr_turn
 
-def push_file(filename):
-    id = random.randint(1,1000000)
-    y, comp = eval_complexity(filename)
-    #xid = (str(id)+'_'+str(y))
-    r.rpush('id_queue_'+y, id)
-    return (id,y)
+def push_file(filename, id):
+    y = eval_complexity(filename)
+    r.rpush('id_queue_' + y, id)
+    return y
 
 @app.route("/")
 def homepage():
@@ -122,9 +117,10 @@ def upload_file():
             return '<p style="color:red">File is empty</b></p>'
         if file and not allowed_file(file.filename): # check if the file is an allowed extension
             return '<p style="color:red">File not supported</b></p>'
-        id, cat = push_file(filename)
+        id = random.randint(1,1_000_000)    # add randomness to filename
         filename = str(id) + "_" + secure_filename(file.filename) #Secure function to prevent path traversal
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        cat = push_file(filename, id)
         while int(wait_queue(cat)) != id:
             pass
         out, start, end, error = process_file(filename, cat)
@@ -141,7 +137,8 @@ def download(filename):
 
 @app.route('/enqueue/<path:filename>', methods=['GET'])
 def enqueue(filename):
-        id, cat = push_file(filename)
+        id = random.randint(1,1_000_000)    # generate random token
+        cat = push_file(filename, id)
         # if the file at the head of queue is him, then it's his time to get processed (go inside active queue)
         # otherwise continue looping
         while int(wait_queue(cat)) != id:

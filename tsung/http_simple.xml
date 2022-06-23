@@ -21,9 +21,11 @@
   <load>
   <!-- several arrival phases can be set: for each phase, you can set
   the mean inter-arrival time between new clients and the phase
-  duration -->
-   <arrivalphase phase="1" duration="4" unit="minute">
-     <users interarrival="0.4" unit="second"></users>
+  duration 
+   <arrivalphase phase="1" duration="10" unit="minute">
+   -->
+   <arrivalphase phase="1" duration="5" unit="minute">
+     <users interarrival="0.25" unit="second"></users>
    </arrivalphase>
   </load>
 
@@ -38,13 +40,13 @@
   frequency of this type os session. The sum of all session's
   probabilities must be 100 -->
 
- <sessions>
-  <session name="http-example" probability="100" type="ts_http">
-
-    <!-- full url with server name, this overrides the "server" config value -->
-
-    <request> <http url="/enqueue/28210_unrar.c" method="GET" version="1.1" ></http> </request>
-
+ <sessions>  
+  <session name="http-example" probability="67" type="ts_http">
+    <request> <http url="/enqueue/linux_profiler.c" method="GET" version="1.1" ></http> </request>
+  </session>
+  
+  <session name="http-example" probability="33" type="ts_http">
+    <request> <http url="/enqueue/unrar.c" method="GET" version="1.1" ></http> </request>
   </session>
  </sessions>
 </tsung>
